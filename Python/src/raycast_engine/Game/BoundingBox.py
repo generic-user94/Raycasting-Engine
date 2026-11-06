@@ -1,13 +1,14 @@
 
 
+
 class BoundingBox():
-    def __init__(self, x1, y1, height, width):
+    def __init__(self, x1, y1, x2, y2):
         self.x1 = x1
         self.y1 = y1
-        self.x2 = x1 + width
-        self.y2 = y1 + height
-        self.width = width
-        self.height = height
+        self.x2 = x2
+        self.y2 = y2
+        self.width = x2 - x1
+        self.height = y2 - y2
 
     def move(self, x, y):
         self.x1 = x

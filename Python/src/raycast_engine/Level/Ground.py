@@ -11,7 +11,7 @@ class Ground():
         pass
 
     def addBox(self, x1, y1, x2, y2):
-        self.boxes.append(BoundingBox(x1, y1, abs(x1-x2), abs(y1-y2)))
+        self.boxes.append(BoundingBox(x1, y1, x2, y2))
 
     def clear(self):
         self.boxes = []
