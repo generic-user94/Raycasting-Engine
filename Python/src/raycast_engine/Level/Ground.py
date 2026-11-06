@@ -1,22 +1,27 @@
-from Python.src.raycast_engine.Game.BoundingBox import BoundingBox
+from Game.BoundingBox import BoundingBox
 
 
-class Ground():
+class Ground:
     def __init__(self, game):
+        # hit
         self.game = game
         self.game.world.addToTickList(self)
         self.boxes = []
 
     def tick(self):
+
         pass
 
     def addBox(self, x1, y1, x2, y2):
-        self.boxes.append(BoundingBox(x1, y1, abs(x1-x2), abs(y1-y2)))
+        # not hit
+        self.boxes.append(BoundingBox(x1, y1, abs(x1 - x2), abs(y1 - y2)))
 
     def clear(self):
+        # not hit
         self.boxes = []
 
     def hits(self, x, y):
+        # not hit
         for box in self.boxes:
             if box.hits(x, y):
                 return True
