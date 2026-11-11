@@ -8,7 +8,7 @@ class BoundingBox():
         self.x2 = x2
         self.y2 = y2
         self.width = x2 - x1
-        self.height = y2 - y2
+        self.height = y2 - y1
 
     def move(self, x, y):
         self.x1 = x

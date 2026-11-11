@@ -9,9 +9,9 @@ class Main():
         self.window.title('Raycast Engine')
         self.canvas = tk.Canvas(self.window, height=750, width=1500, bg='black')
         self.canvas.pack()
-        self.renderer = Renderer(self)
         self.objectsToTick = []
         self.game = GameHandler(self)
+        self.renderer = Renderer(self)
         self.game.loadLevel(0)
 
     def addToTickList(self, object):
