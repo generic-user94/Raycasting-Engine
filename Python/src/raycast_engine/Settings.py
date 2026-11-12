@@ -2,5 +2,5 @@
 
 
 class Settings():
-    FOV = 100
-    QUALITY = 100
+    FOV = 70
+    QUALITY = 200

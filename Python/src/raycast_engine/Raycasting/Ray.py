@@ -17,8 +17,15 @@ class Ray():
 
     def cast(self):
         while True:
-            x, y = getPointInDir(self.box.x1 + 1, self.box.y1 + 1, 5, self.dir)
+            x, y = getPointInDir(self.box.x1 + 1, self.box.y1 + 1, 10, self.dir)
             self.box.move(x - 1, y - 1)
             if self.game.ground.hitsBox(self.box):
+                x, y = getPointInDir(self.box.x1 + 1, self.box.y1 + 1, -10, self.dir)
+                self.box.move(x - 1, y - 1)
+                while True:
+                    x, y = getPointInDir(self.box.x1 + 1, self.box.y1 + 1, 1, self.dir)
+                    self.box.move(x - 1, y - 1)
+                    if self.game.ground.hitsBox(self.box):
+                        break
                 break
         self.dist = distance(self.x, self.y, self.box.x1 + 1, self.box.y1 + 1)

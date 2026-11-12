@@ -1,4 +1,5 @@
 from Python.src.raycast_engine.Game.BoundingBox import BoundingBox
+from Python.src.raycast_engine.Util import getPointInDir
 
 
 class Player():
@@ -16,22 +17,30 @@ class Player():
         dx = 0
         dy = 0
         if 'w' in self.game.keys:
-            dy -= 2
-        if 's' in self.game.keys:
-            dy += 2
-        if 'a' in self.game.keys:
-            dx -= 2
-        if 'd' in self.game.keys:
-            dx += 2
+            dx, dy = getPointInDir(0, 0, 100 * self.game.world.deltaTime, self.dir - 90)
+            dx = int(dx)
+            dy = int(dy)
 
-        self.hitbox.move(self.hitbox.x1 + dx, self.hitbox.y1)
-        if not self.game.ground.hitsBox(self.hitbox):
-            self.x += dx
-        else:
-            self.hitbox.move(self.hitbox.x1 - dx, self.hitbox.y1)
+        for x in range(abs(dx)):
+            self.hitbox.move(self.hitbox.x1 + 1*(abs(dx)/dx), self.hitbox.y1)
+            if self.game.ground.hitsBox(self.hitbox):
+                self.hitbox.move(self.hitbox.x1 - 1*(abs(dx)/dx), self.hitbox.y1)
+                break
+            else:
+                self.x += 1*(abs(dx)/dx)
 
-        self.hitbox.move(self.hitbox.x1, self.hitbox.y1 + dy)
-        if not self.game.ground.hitsBox(self.hitbox):
-            self.y += dy
-        else:
-            self.hitbox.move(self.hitbox.x1, self.hitbox.y1 - dy)
+        for x in range(abs(dy)):
+            print('moved up')
+            self.hitbox.move(self.hitbox.x1, self.hitbox.y1 + 1*(abs(dy)/dy))
+            if self.game.ground.hitsBox(self.hitbox):
+                self.hitbox.move(self.hitbox.x1, self.hitbox.y1 - 1*(abs(dy)/dy))
+                break
+            else:
+                self.y += 1*(abs(dy)/dy)
+
+
+
+        if 'q' in self.game.keys:
+            self.dir -= 100 * self.game.world.deltaTime
+        if 'e' in self.game.keys:
+            self.dir += 100 * self.game.world.deltaTime

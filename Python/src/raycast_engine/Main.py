@@ -1,4 +1,5 @@
 import tkinter as tk
+import time
 
 from Python.src.raycast_engine.Renderer import Renderer
 from Python.src.raycast_engine.Game.GameHandler import GameHandler
@@ -13,16 +14,21 @@ class Main():
         self.game = GameHandler(self)
         self.renderer = Renderer(self)
         self.game.loadLevel(0)
+        self.oldTime = 0
+        self.deltaTime = 5
 
     def addToTickList(self, object):
         self.objectsToTick.append(object)
 
     def tick(self):
+
         self.canvas.delete('all')
         for object in self.objectsToTick:
             object.tick()
         self.renderer.tick()
         self.window.update()
+        self.deltaTime = time.monotonic() - self.oldTime
+        self.oldTime = time.monotonic()
         world.window.after(5, world.tick)
 
 
